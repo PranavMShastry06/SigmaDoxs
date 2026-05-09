@@ -5,9 +5,13 @@ import uvicorn
 import PyPDF2
 from groq import Groq
 import io
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = FastAPI()
-
+print("ENV CHECK:")
+print(os.getenv("GROQ_API_KEY"))
 # CORS
 
 app.add_middleware(
@@ -24,7 +28,7 @@ users_db = {}
 # GROQ CLIENT
 
 client = Groq(
-    api_key="YOUR_GROQ_API_KEY"
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 # MODELS
