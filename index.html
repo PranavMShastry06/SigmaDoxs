@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SigmaDoxs // Neural Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- Icons for extra polish -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
@@ -15,70 +16,94 @@
 
 <div class="gradient-overlay"></div>
 <div class="noise"></div>
-
 <div class="cursor"></div>
 <div class="cursor-blur"></div>
 
 <nav>
     <div class="nav-left">
-        <h2>Sigma<span>Doxs</span></h2>
+        <h2 class="orbitron logo">SIGMA<span>DOXS</span></h2>
     </div>
     <div class="nav-links">
-        <a href="#" onclick="showPage('homePage')">Home</a>
-        <a href="#" onclick="showPage('summaryPage')">Summaries</a>
-        <a href="#" onclick="showPage('qaPage')">AI Q&A</a>
-        <a href="#" onclick="showPage('pricingPage')">Pricing</a>
+        <a href="javascript:void(0)" class="nav-item active" onclick="showPage('homePage', this)">
+            <ion-icon name="home-outline"></ion-icon> HOME
+        </a>
+        <a href="javascript:void(0)" class="nav-item" onclick="showPage('summaryPage', this)">
+            <ion-icon name="document-text-outline"></ion-icon> BRIEFING
+        </a>
+        <a href="javascript:void(0)" class="nav-item" onclick="showPage('qaPage', this)">
+            <ion-icon name="terminal-outline"></ion-icon> NEURAL CHAT
+        </a>
     </div>
     <div class="nav-right">
-        <div class="auth-buttons">
-            <button class="signin-btn" id="signinBtn">Sign In</button>
-            <button class="logout-btn" id="logoutBtn">Terminated Access</button>
+        <div class="auth-box">
+            <div id="tokenDisplay" class="token-pill">
+                <span class="pulse"></span> ⚡ <span id="tokenCount">0</span> TOKENS
+            </div>
+            <button class="glow-btn" id="signinBtn">IDENTIFY_USER</button>
+            <button class="danger-btn" id="logoutBtn" style="display:none;">TERMINATE</button>
         </div>
     </div>
 </nav>
 
-<section class="page active-page" id="homePage">
-    <div class="hero">
-        <div class="hero-left">
-            <div class="tag">NEURAL CORE V1.0</div>
-            <h1>Transform Docs Into <span>Intelligence</span></h1>
-            <p>Upload PDFs into a futuristic AI workspace built for contextual understanding.</p>
-            <div class="hero-buttons">
-                <input type="file" id="pdfUpload" hidden accept=".pdf">
-                <button class="primary-btn" id="uploadBtn">Initialize Core</button>
+<main>
+    <section class="page active-page" id="homePage">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="badge">SYSTEM STATUS: OPTIMAL</div>
+                <h1 class="orbitron main-title">NEURAL <span>EXTRACTION</span> ENGINE</h1>
+                <p class="hero-subtitle">Synthesize complex archives into actionable intelligence using Sigma’s neural core.</p>
+                
+                <div class="action-zone">
+                    <input type="file" id="pdfUpload" hidden accept=".pdf">
+                    <button class="cyber-button" id="uploadBtn">
+                        <span class="cybr-btn__glitch"></span>
+                        <ion-icon name="cloud-upload-outline"></ion-icon> INITIALIZE CORE
+                    </button>
+                </div>
             </div>
-            <div class="token-display">⚡ TOKENS: <span id="tokenCount">0</span></div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="page" id="summaryPage">
-    <div class="content-page">
-        <h1>Document Briefing</h1>
-        <h3 id="summaryDocName" class="neon-text">Awaiting Archive...</h3>
-        <div class="summary-box" id="summaryContent">Upload a PDF to generate a neural summary.</div>
-        <div class="keyword-grid" id="keywordGrid"></div>
-    </div>
-</section>
-
-<section class="page" id="qaPage">
-    <div class="content-page">
-        <h1>Neural Interface</h1>
-        <div class="chat-container" id="chatContainer"></div>
-        <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="> Query document intelligence..." autocomplete="off">
-            <button id="sendBtn">EXECUTE_QUERY</button>
+    <section class="page" id="summaryPage">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1 class="orbitron">DATA_<span>SUMMARY</span></h1>
+                <p id="summaryDocName" class="file-tag">> AWAITING_ENCRYPTED_STREAM</p>
+            </div>
+            <div class="summary-card">
+                <div id="summaryContent" class="typewriter-text">Waiting for neural uplink...</div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- MODAL -->
-<div class="login-modal" id="loginModal">
-    <div class="login-box">
-        <h2>IDENTIFY_USER</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button id="loginBtn">ACCESS_GRANTED</button>
+    <section class="page" id="qaPage">
+        <div class="chat-wrapper">
+            <div id="chatContainer" class="chat-container">
+                <div class="message ai-message">
+                    <ion-icon name="hardware-chip-outline"></ion-icon>
+                    <span>System initialized. I am ready to process contextual queries regarding your uploaded archives.</span>
+                </div>
+            </div>
+            <div class="chat-input-row">
+                <input type="text" id="chatInput" placeholder="> Input query for neural core..." autocomplete="off">
+                <button id="sendBtn" class="icon-btn">
+                    <ion-icon name="send-sharp"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-box">
+        <div class="modal-deco"></div>
+        <h2 class="orbitron">USER_AUTHENTICATION</h2>
+        <div class="input-container">
+            <input type="text" id="username" placeholder="DESIGNATION">
+            <input type="password" placeholder="SECURITY_KEY">
+        </div>
+        <button id="loginBtn" class="cyber-button mini">GRANT_ACCESS</button>
     </div>
 </div>
 
