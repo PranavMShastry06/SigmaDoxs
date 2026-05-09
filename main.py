@@ -6,12 +6,9 @@ import PyPDF2
 from groq import Groq
 import io
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 app = FastAPI()
-print("ENV CHECK:")
-print(os.getenv("GROQ_API_KEY"))
+
 # CORS
 
 app.add_middleware(
@@ -21,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Dynamic Users Database
+# USERS DATABASE
 
 users_db = {}
 
@@ -46,9 +43,6 @@ class ChatRequest(BaseModel):
 
 @app.post("/login")
 async def login(req: LoginRequest):
-
-    # AUTO CREATE USER
-    # ANY USERNAME/PASSWORD ACCEPTED
 
     if req.username not in users_db:
 
@@ -138,12 +132,12 @@ async def chat(req: ChatRequest):
     users_db[req.username]["tokens"] -= 1
 
     prompt = f"""
-    Context:
-    {req.context}
+Context:
+{req.context}
 
-    Question:
-    {req.message}
-    """
+Question:
+{req.message}
+"""
 
     completion = client.chat.completions.create(
 
@@ -163,6 +157,15 @@ async def chat(req: ChatRequest):
     return {
         "reply": reply,
         "remaining_tokens": users_db[req.username]["tokens"]
+    }
+
+# ROOT ROUTE
+
+@app.get("/")
+async def root():
+
+    return {
+        "message": "SigmaDoxs Backend Running"
     }
 
 # RUN
