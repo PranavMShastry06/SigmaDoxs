@@ -1,365 +1,71 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+:root {
+    --bg: #050816;
+    --neon-cyan: #00bfff;
+    --neon-purple: #8a2be2;
+    --error-red: #ff3e3e;
+    --glass: rgba(255, 255, 255, 0.05);
 }
 
-body{
-font-family:'Inter',sans-serif;
-background:#050816;
-color:white;
-overflow-x:hidden;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: white;
+    overflow-x: hidden;
+    cursor: none; /* Custom cursor only */
 }
 
-.gradient-overlay{
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at top left,rgba(0,191,255,0.18),transparent 30%),
-radial-gradient(circle at bottom right,rgba(138,43,226,0.16),transparent 30%),
-#050816;
-z-index:-3;
+/* FIX: Ensure these don't block input */
+.cursor, .cursor-blur, .noise, .gradient-overlay {
+    pointer-events: none !important;
 }
 
-.noise{
-position:fixed;
-inset:0;
-opacity:.03;
-background-image:radial-gradient(rgba(255,255,255,.4) 1px,transparent 1px);
-background-size:4px 4px;
-z-index:-2;
+.cursor { position: fixed; width: 8px; height: 8px; background: white; border-radius: 50%; z-index: 10000; mix-blend-mode: difference; }
+.cursor-blur { position: fixed; width: 200px; height: 200px; background: radial-gradient(circle, rgba(0,191,255,0.15), transparent 70%); z-index: 9999; }
+
+/* INPUT FIX: Must be above everything */
+input {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 100;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
 }
 
-.vignette{
-position:fixed;
-inset:0;
-background:radial-gradient(circle,transparent 45%,rgba(0,0,0,.7));
-z-index:-1;
+/* NEON BUTTONS */
+#sendBtn {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    border: none; color: white; padding: 12px 25px; border-radius: 12px;
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 0.8rem;
+    cursor: pointer; transition: 0.3s; box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
 }
 
-nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:30px 70px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-backdrop-filter:blur(25px);
-z-index:1000;
+#sendBtn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(138, 43, 226, 0.5); }
+
+/* TERMINATED ACCESS BUTTON */
+.logout-btn {
+    display: none;
+    background: rgba(255, 62, 62, 0.1);
+    border: 1px solid var(--error-red);
+    color: var(--error-red);
+    padding: 10px 20px; border-radius: 10px;
+    font-weight: bold; cursor: pointer;
 }
 
-.logo{
-width:65px;
-height:65px;
-border-radius:20px;
-overflow:hidden;
+/* SUMMARY BOX */
+.summary-box {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0, 191, 255, 0.03));
+    border: 1px solid var(--neon-cyan);
+    padding: 40px; border-radius: 20px; margin: 30px 0;
+    line-height: 1.8; color: #ccc; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    position: relative;
 }
 
-.logo img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.nav-left{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-.nav-left h2{
-font-size:2rem;
-font-weight:900;
-}
-
-.nav-left span{
-background:linear-gradient(to right,#00bfff,#8a2be2);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.nav-links{
-display:flex;
-gap:35px;
-}
-
-.nav-links a{
-text-decoration:none;
-color:white;
-opacity:.75;
-}
-
-.auth-buttons{
-display:flex;
-gap:12px;
-}
-
-button{
-cursor:pointer;
-}
-
-.signin-btn,
-.signup-btn,
-.logout-btn,
-.primary-btn,
-.secondary-btn,
-#sendBtn{
-padding:15px 28px;
-border:none;
-border-radius:18px;
-background:rgba(255,255,255,.08);
-color:white;
-font-weight:700;
-}
-
-.signup-btn,
-.primary-btn,
-#sendBtn{
-background:linear-gradient(135deg,#00bfff,#8a2be2);
-}
-
-.hero{
-padding:180px 8% 100px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:60px;
-min-height:100vh;
-}
-
-.hero-left{
-width:55%;
-}
-
-.hero-left h1{
-font-size:6rem;
-line-height:.95;
-font-weight:900;
-margin:30px 0;
-}
-
-.hero-left span{
-background:linear-gradient(to right,#00bfff,#8a2be2);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.hero-left p{
-font-size:1.1rem;
-line-height:2;
-opacity:.75;
-max-width:700px;
-}
-
-.tag{
-padding:14px 24px;
-border-radius:50px;
-background:rgba(255,255,255,.05);
-width:max-content;
-}
-
-.hero-buttons{
-margin-top:50px;
-display:flex;
-gap:20px;
-}
-
-.token-display{
-margin-top:35px;
-font-size:1.1rem;
-color:#00bfff;
-}
-
-.hero-right{
-width:45%;
-position:relative;
-height:600px;
-}
-
-.glass-card{
-position:absolute;
-width:280px;
-padding:30px;
-border-radius:30px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(25px);
-box-shadow:0 0 60px rgba(0,191,255,.08);
-}
-
-.card1{
-top:20px;
-left:0;
-}
-
-.card2{
-top:220px;
-right:0;
-}
-
-.card3{
-bottom:20px;
-left:60px;
-}
-
-.page{
-display:none;
-padding-top:120px;
-min-height:100vh;
-}
-
-.active-page{
-display:block;
-}
-
-.content-page{
-padding:60px 8%;
-}
-
-.summary-box,
-.chat-container,
-.price-card,
-.message,
-.chat-input-area{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(25px);
-border-radius:30px;
-}
-
-.summary-box{
-padding:35px;
-margin-top:30px;
-line-height:2;
-}
-
-.keyword-grid{
-display:flex;
-flex-wrap:wrap;
-gap:15px;
-margin-top:25px;
-}
-
-.keyword-grid span{
-padding:12px 18px;
-border-radius:50px;
-background:rgba(255,255,255,.08);
-}
-
-.chat-container{
-padding:30px;
-height:500px;
-overflow-y:auto;
-margin-top:30px;
-}
-
-.message{
-padding:20px;
-margin-bottom:18px;
-}
-
-.chat-input-area{
-display:flex;
-gap:15px;
-padding:20px;
-margin-top:20px;
-}
-
-.chat-input-area input{
-flex:1;
-background:transparent;
-border:none;
-outline:none;
-color:white;
-font-size:1rem;
-}
-
-.pricing-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
-margin-top:50px;
-}
-
-.price-card{
-padding:40px;
-text-align:center;
-}
-
-.popular{
-transform:scale(1.04);
-border:1px solid rgba(0,191,255,.3);
-}
-
-.login-modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.65);
-backdrop-filter:blur(15px);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-.login-box{
-width:400px;
-padding:40px;
-border-radius:30px;
-background:#11162c;
-display:flex;
-flex-direction:column;
-gap:18px;
-}
-
-.login-box input{
-padding:18px;
-border:none;
-border-radius:16px;
-background:rgba(255,255,255,.08);
-color:white;
-}
-
-.cursor,
-.cursor-blur{
-position:fixed;
-pointer-events:none;
-border-radius:50%;
-transform:translate(-50%,-50%);
-z-index:99999;
-}
-
-.cursor{
-width:18px;
-height:18px;
-background:white;
-mix-blend-mode:difference;
-}
-
-.cursor-blur{
-width:300px;
-height:300px;
-background:radial-gradient(circle,rgba(0,191,255,.16),transparent 70%);
-}
-
-@media(max-width:1000px){
-.hero{
-flex-direction:column;
-text-align:center;
-}
-
-.hero-left,
-.hero-right{
-width:100%;
-}
-
-.hero-left h1{
-font-size:4rem;
-}
-
-.nav-links{
-display:none;
-}
+.summary-box::before {
+    content: "NEURAL_ANALYSIS"; position: absolute; top: -10px; left: 20px;
+    background: var(--bg); color: var(--neon-cyan); font-family: 'Orbitron'; font-size: 0.6rem; padding: 0 10px;
 }

@@ -1,171 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SigmaDoxs</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SigmaDoxs // Neural Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
 
 <div class="gradient-overlay"></div>
 <div class="noise"></div>
-<div class="vignette"></div>
 
 <div class="cursor"></div>
 <div class="cursor-blur"></div>
 
 <nav>
-<div class="nav-left">
-<div class="logo">
-<img src="images/logo.png" alt="logo">
-</div>
-<h2>Sigma<span>Doxs</span></h2>
-</div>
-
-<div class="nav-links">
-<a href="#" onclick="showPage('homePage')">Home</a>
-<a href="#" onclick="showPage('summaryPage')">Summaries</a>
-<a href="#" onclick="showPage('qaPage')">AI Q&A</a>
-<a href="#" onclick="showPage('pricingPage')">Pricing</a>
-<a href="#" onclick="showPage('aboutPage')">About</a>
-</div>
-
-<div class="nav-right">
-<div class="auth-buttons">
-<button class="signin-btn" id="signinBtn">Sign In</button>
-<button class="signup-btn" id="signupBtn">Sign Up</button>
-<button class="logout-btn" id="logoutBtn">Sign Out</button>
-</div>
-</div>
+    <div class="nav-left">
+        <h2>Sigma<span>Doxs</span></h2>
+    </div>
+    <div class="nav-links">
+        <a href="#" onclick="showPage('homePage')">Home</a>
+        <a href="#" onclick="showPage('summaryPage')">Summaries</a>
+        <a href="#" onclick="showPage('qaPage')">AI Q&A</a>
+        <a href="#" onclick="showPage('pricingPage')">Pricing</a>
+    </div>
+    <div class="nav-right">
+        <div class="auth-buttons">
+            <button class="signin-btn" id="signinBtn">Sign In</button>
+            <button class="logout-btn" id="logoutBtn">Terminated Access</button>
+        </div>
+    </div>
 </nav>
 
 <section class="page active-page" id="homePage">
-<div class="hero">
-<div class="hero-left">
-<div class="tag">NEXT GEN AI DOCUMENT ENGINE</div>
-<h1>
-Transform Documents Into
-<span>Intelligence</span>
-</h1>
-
-<p>
-Upload PDFs, reports and notes into a futuristic AI workspace built for contextual understanding, smart summaries and real-time interaction.
-</p>
-
-<div class="hero-buttons">
-<input type="file" id="pdfUpload" hidden accept=".pdf">
-<button class="primary-btn" id="uploadBtn">Upload Document</button>
-<button class="secondary-btn" onclick="showPage('pricingPage')">Explore Platform</button>
-</div>
-
-<div class="token-display">
-⚡ Tokens: <span id="tokenCount">8</span>
-</div>
-</div>
-
-<div class="hero-right">
-<div class="glass-card card1">
-<h3>AI Summary</h3>
-<p>Generate instant contextual summaries from uploaded PDFs.</p>
-</div>
-
-<div class="glass-card card2">
-<h3>Interactive AI</h3>
-<p>Ask questions directly from your uploaded documents.</p>
-</div>
-
-<div class="glass-card card3">
-<h3>Deep Analytics</h3>
-<p>Extract insights, keywords and semantic understanding.</p>
-</div>
-</div>
-</div>
+    <div class="hero">
+        <div class="hero-left">
+            <div class="tag">NEURAL CORE V1.0</div>
+            <h1>Transform Docs Into <span>Intelligence</span></h1>
+            <p>Upload PDFs into a futuristic AI workspace built for contextual understanding.</p>
+            <div class="hero-buttons">
+                <input type="file" id="pdfUpload" hidden accept=".pdf">
+                <button class="primary-btn" id="uploadBtn">Initialize Core</button>
+            </div>
+            <div class="token-display">⚡ TOKENS: <span id="tokenCount">0</span></div>
+        </div>
+    </div>
 </section>
 
 <section class="page" id="summaryPage">
-<div class="content-page">
-<h1>Document Summary</h1>
-<h3 id="summaryDocName">No Document Uploaded</h3>
-
-<div class="summary-box" id="summaryContent">
-Upload a PDF to generate summary.
-</div>
-
-<h2>Top Keywords</h2>
-<div class="keyword-grid" id="keywordGrid"></div>
-</div>
+    <div class="content-page">
+        <h1>Document Briefing</h1>
+        <h3 id="summaryDocName" class="neon-text">Awaiting Archive...</h3>
+        <div class="summary-box" id="summaryContent">Upload a PDF to generate a neural summary.</div>
+        <div class="keyword-grid" id="keywordGrid"></div>
+    </div>
 </section>
 
 <section class="page" id="qaPage">
-<div class="content-page">
-<h1>AI Q&A</h1>
-
-<div class="chat-container" id="chatContainer">
-<div class="message ai-message">
-<div class="message-content">
-Hello! Upload a PDF and ask questions about it.
-</div>
-</div>
-</div>
-
-<div class="chat-input-area">
-<input type="text" id="chatInput" placeholder="Ask about your document...">
-<button id="sendBtn">Send</button>
-</div>
-</div>
+    <div class="content-page">
+        <h1>Neural Interface</h1>
+        <div class="chat-container" id="chatContainer"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="> Query document intelligence..." autocomplete="off">
+            <button id="sendBtn">EXECUTE_QUERY</button>
+        </div>
+    </div>
 </section>
 
-<section class="page" id="pricingPage">
-<div class="content-page">
-<h1>Pricing</h1>
-
-<div class="pricing-grid">
-<div class="price-card">
-<h2>Free</h2>
-<h3>₹0</h3>
-<p>Basic AI summaries and Q&A.</p>
-</div>
-
-<div class="price-card popular">
-<h2>Pro</h2>
-<h3>₹499/mo</h3>
-<p>Unlimited uploads and advanced AI.</p>
-</div>
-
-<div class="price-card">
-<h2>Enterprise</h2>
-<h3>Custom</h3>
-<p>Private AI workspace for teams.</p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="page" id="aboutPage">
-<div class="content-page">
-<h1>About SigmaDoxs</h1>
-<p>
-SigmaDoxs is a futuristic AI-powered PDF intelligence platform built for summaries, semantic analysis and conversational AI.
-</p>
-</div>
-</section>
-
+<!-- MODAL -->
 <div class="login-modal" id="loginModal">
-<div class="login-box">
-<h2>Welcome to SigmaDoxs</h2>
-<input type="text" id="username" placeholder="Username">
-<input type="password" id="password" placeholder="Password">
-<button id="loginBtn">Continue</button>
-</div>
+    <div class="login-box">
+        <h2>IDENTIFY_USER</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button id="loginBtn">ACCESS_GRANTED</button>
+    </div>
 </div>
 
 <script src="script.js"></script>
