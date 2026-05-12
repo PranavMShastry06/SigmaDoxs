@@ -20,6 +20,11 @@ let currentContext = "";
 let documentsUploaded = 0;
 let questionsAsked = 0;
 
+/* BACKEND URL */
+
+const API_BASE =
+"https://sigmadoxs-1.onrender.com";
+
 /* CURSOR */
 
 const cursor = document.querySelector('.cursor');
@@ -119,7 +124,7 @@ return;
 try{
 
 const res = await fetch(
-'http://127.0.0.1:8000/login',
+`${API_BASE}/login`,
 {
 method:'POST',
 
@@ -291,7 +296,7 @@ Analyzing PDF...
 
 const res = await fetch(
 
-`http://127.0.0.1:8000/upload?username=${currentUser}`,
+`${API_BASE}/upload?username=${currentUser}`,
 
 {
 method:'POST',
@@ -362,7 +367,7 @@ try{
 
 const res = await fetch(
 
-'http://127.0.0.1:8000/chat',
+`${API_BASE}/chat`,
 
 {
 method:'POST',
